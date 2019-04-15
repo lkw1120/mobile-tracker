@@ -5,7 +5,6 @@ public class TransactionInfo {
     private String version;
     private String from;
     private String to;
-    private String value;
     private String stepLimit;
     private String timestamp;
     private String nid;
@@ -40,14 +39,6 @@ public class TransactionInfo {
 
     public void setTo(String to) {
         this.to = to;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
     }
 
     public String getStepLimit() {

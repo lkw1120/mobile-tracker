@@ -1,6 +1,8 @@
 package lkw1120.com.simpletracker.Adapter;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 import lkw1120.com.simpletracker.Model.BlockInfo;
 import lkw1120.com.simpletracker.R;
 import lkw1120.com.simpletracker.Task.GetBlockTask;
+import lkw1120.com.simpletracker.TransactionActivity;
 
 public class BlockRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -66,11 +69,9 @@ public class BlockRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.
             ((BlockViewHolder) holder).blockHash.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    /*
-                    Intent intent = new Intent(view.getContext(),TransactionActivity.class);
+                    Intent intent = new Intent(view.getContext(), TransactionActivity.class);
                     intent.putStringArrayListExtra("txHash",blockInfo.getTxHash());
                     ContextCompat.startActivity(view.getContext(),intent,null);
-                    */
                 }
             });
 
