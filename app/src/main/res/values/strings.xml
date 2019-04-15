@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">simpleTracker</string>
+
+    <string name="item_footer">Next Load</string>
 </resources>

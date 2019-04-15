@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="blockitem_out_size">74dp</dimen>
+    <dimen name="blockitem_in_size">68dp</dimen>
+    <dimen name="blockitem_gap_size">3dp</dimen>
+    <dimen name="blockitem_footer_size">100dp</dimen>
+
+    <dimen name="transactionitem_out_size">150dp</dimen>
+    <dimen name="transactionitem_in_size">34dp</dimen>
+    <dimen name="transactionitem_gap_size">3dp</dimen>
+
+    <dimen name="item_text_size">18sp</dimen>
+</resources>
