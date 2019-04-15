@@ -1,9 +1,6 @@
 package lkw1120.com.simpletracker.Adapter;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +13,6 @@ import java.util.ArrayList;
 import lkw1120.com.simpletracker.Model.BlockInfo;
 import lkw1120.com.simpletracker.R;
 import lkw1120.com.simpletracker.Task.GetBlockTask;
-import lkw1120.com.simpletracker.TransactionActivity;
 
 public class BlockRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -29,13 +25,9 @@ public class BlockRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.
 
     public void getBlockList() {
         try {
-            for(int i=0;i<10;i++) {
-                if(height == 0) break;
-                height--;
-                GetBlockTask getBlockTask = new GetBlockTask();
-                blockList.add(getBlockTask.execute(height).get());
-                height = Integer.parseInt(blockList.get(blockList.size()-1).getHeight());
-            }
+            GetBlockTask getBlockTask = new GetBlockTask();
+            blockList.addAll(getBlockTask.execute(height).get());
+            height = Integer.parseInt(blockList.get(blockList.size() - 1).getHeight());
         }catch(Exception e) {
             e.printStackTrace();
         }
@@ -43,10 +35,8 @@ public class BlockRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.
 
     /*
     public void saveCheckedBlock() {
-
         for(BlockInfo blockInfo : blockList) {
             if(blockInfo.isSelected()) {
-
             }
         }
     }
@@ -76,9 +66,11 @@ public class BlockRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.
             ((BlockViewHolder) holder).blockHash.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    /*
                     Intent intent = new Intent(view.getContext(),TransactionActivity.class);
                     intent.putStringArrayListExtra("txHash",blockInfo.getTxHash());
                     ContextCompat.startActivity(view.getContext(),intent,null);
+                    */
                 }
             });
 
@@ -89,10 +81,8 @@ public class BlockRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (buttonView.isChecked()) {
-
                     }
                     else {
-
                     }
                 }
             });
