@@ -1,6 +1,9 @@
 package lkw1120.com.simpletracker.Adapter;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +14,9 @@ import java.util.ArrayList;
 
 import lkw1120.com.simpletracker.Model.TransactionInfo;
 import lkw1120.com.simpletracker.R;
+import lkw1120.com.simpletracker.ResultActivity;
 import lkw1120.com.simpletracker.Task.GetTransactionTask;
+import lkw1120.com.simpletracker.TransactionActivity;
 
 public class TransactionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -45,6 +50,14 @@ public class TransactionRecyclerViewAdapter extends RecyclerView.Adapter<Recycle
             ((TransactionViewHolder) holder).txHash.setText(txInfo.getTxHash());
             ((TransactionViewHolder) holder).from.setText(txInfo.getFrom());
             ((TransactionViewHolder) holder).to.setText(txInfo.getTo());
+            ((TransactionViewHolder) holder).txHash.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(view.getContext(), ResultActivity.class);
+                    intent.putExtra("txHash",txInfo.getTxHash());
+                    ContextCompat.startActivity(view.getContext(),intent,null);
+                }
+            });
         }
     }
 
