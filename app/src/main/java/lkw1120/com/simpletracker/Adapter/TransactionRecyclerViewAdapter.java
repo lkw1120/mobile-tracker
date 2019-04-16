@@ -1,10 +1,8 @@
 package lkw1120.com.simpletracker.Adapter;
 
-import android.app.Activity;
+import androidx.annotation.NonNull;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.RecyclerView;
+import androidx.core.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +10,11 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import androidx.recyclerview.widget.RecyclerView;
 import lkw1120.com.simpletracker.Model.TransactionInfo;
 import lkw1120.com.simpletracker.R;
 import lkw1120.com.simpletracker.ResultActivity;
 import lkw1120.com.simpletracker.Task.GetTransactionTask;
-import lkw1120.com.simpletracker.TransactionActivity;
 
 public class TransactionRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 

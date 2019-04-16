@@ -2,6 +2,8 @@ package lkw1120.com.simpletracker.Model;
 
 import java.util.ArrayList;
 
+import androidx.room.PrimaryKey;
+
 public class BlockInfo {
 
     private String version;

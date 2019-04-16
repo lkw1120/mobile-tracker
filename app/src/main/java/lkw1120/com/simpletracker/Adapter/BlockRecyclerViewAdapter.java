@@ -1,17 +1,20 @@
 package lkw1120.com.simpletracker.Adapter;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import androidx.recyclerview.widget.RecyclerView;
 import lkw1120.com.simpletracker.Model.BlockInfo;
 import lkw1120.com.simpletracker.R;
 import lkw1120.com.simpletracker.Task.GetBlockTask;
@@ -65,8 +68,9 @@ public class BlockRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof BlockViewHolder) {
             final BlockInfo blockInfo = blockList.get(holder.getAdapterPosition());
-            ((BlockViewHolder) holder).blockHash.setText(blockInfo.getBlockHash());
-            ((BlockViewHolder) holder).blockHash.setOnClickListener(new View.OnClickListener() {
+            BlockViewHolder blockViewHolder = (BlockViewHolder) holder;
+            blockViewHolder.blockHash.setText(blockInfo.getBlockHash());
+            blockViewHolder.blockHash.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(view.getContext(), TransactionActivity.class);
@@ -75,19 +79,19 @@ public class BlockRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.
                 }
             });
 
-            ((BlockViewHolder) holder).checkBox.setOnCheckedChangeListener(null);
-            ((BlockViewHolder) holder).checkBox.setChecked(blockInfo.isSelected());
-            /*
-            ((BlockViewHolder) holder).checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            blockViewHolder.checkBox.setOnCheckedChangeListener(null);
+            blockViewHolder.checkBox.setChecked(blockInfo.isSelected());
+            blockViewHolder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (buttonView.isChecked()) {
+                            Log.d("Database","insert success?");
                     }
                     else {
+                            Log.d("Database","delete success?");
                     }
                 }
             });
-            */
         }
     }
 

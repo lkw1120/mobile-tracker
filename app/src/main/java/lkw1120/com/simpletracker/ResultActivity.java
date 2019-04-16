@@ -1,10 +1,10 @@
 package lkw1120.com.simpletracker;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import lkw1120.com.simpletracker.Model.ResultInfo;
 import lkw1120.com.simpletracker.Task.GetResultTask;
 
