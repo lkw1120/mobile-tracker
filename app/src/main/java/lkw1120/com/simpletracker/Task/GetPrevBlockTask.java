@@ -1,6 +1,7 @@
 package lkw1120.com.simpletracker.Task;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.json.JSONObject;
 
@@ -10,8 +11,12 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
-public class GetResultTask  extends AsyncTask<String, Integer, String> {
+import lkw1120.com.simpletracker.Database.Block;
+
+
+public class GetPrevBlockTask extends AsyncTask<String, Integer, Block> {
 
     private final String API_URL = "https://bicon.net.solidwallet.io/api/v3";
 
@@ -21,22 +26,22 @@ public class GetResultTask  extends AsyncTask<String, Integer, String> {
     }
 
     @Override
-    protected String doInBackground(String... values) {
-        String result = null;
+    protected Block doInBackground(String... values) {
+        Block block = new Block();
         try {
             URL url = new URL(API_URL);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type","application/json");
+            conn.setRequestProperty("Content-Type", "application/json");
             conn.setDoInput(true);
             conn.setDoOutput(true);
 
             JSONObject requestJSON = new JSONObject();
-            requestJSON.put("jsonrpc","2.0");
-            requestJSON.put("method","icx_getTransactionResult");
-            requestJSON.put("id","1000");
+            requestJSON.put("jsonrpc", "2.0");
+            requestJSON.put("id", "1000");
+            requestJSON.put("method", "icx_getBlockByHash");
             JSONObject obj = new JSONObject();
-            obj.put("txHash", values[0]);
+            obj.put("hash", "0x" + values[0]);
             requestJSON.put("params", obj);
 
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
@@ -47,19 +52,21 @@ public class GetResultTask  extends AsyncTask<String, Integer, String> {
             if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 StringBuilder sb = new StringBuilder();
-                for(String line = br.readLine();line != null;line = br.readLine()) {
+                for (String line = br.readLine(); line != null; line = br.readLine()) {
                     sb.append(line);
                 }
                 String response = sb.toString();
                 JSONObject responseJSON = new JSONObject(response);
-                result = responseJSON.getJSONObject("result").toString();
+                JSONObject resultObject = responseJSON.getJSONObject("result");
+                block.setResult(resultObject.toString());
+                block.setBlockHash(resultObject.getString("block_hash"));
+                block.setHeight(resultObject.getString("height"));
             }
             conn.disconnect();
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return result;
+        return block;
     }
 
     @Override
@@ -68,7 +75,7 @@ public class GetResultTask  extends AsyncTask<String, Integer, String> {
     }
 
     @Override
-    protected void onPostExecute(String result) {
+    protected void onPostExecute(Block result) {
         super.onPostExecute(result);
     }
 }

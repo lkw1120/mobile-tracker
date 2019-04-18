@@ -3,11 +3,11 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <TextView
-        android:id="@+id/footeritem_text"
+        android:id="@+id/headeritem_textview"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/footeritem_size"
+        android:layout_height="@dimen/headeritem_size"
         android:gravity="center"
-        android:text="@string/item_footer"
+        android:text="@string/item_header"
         android:textSize="@dimen/item_text_size"
         android:textStyle="bold"/>
 </LinearLayout>
